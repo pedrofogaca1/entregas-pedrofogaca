@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://fth60w1mqmsw"]
+
+[ext_resource type="Script" uid="uid://cy6e8rtahbhvx" path="res://main.gd" id="1_cm0pq"]
+[ext_resource type="Texture2D" uid="uid://mvhllod22i46" path="res://grass.png" id="2_fos0i"]
+[ext_resource type="PackedScene" uid="uid://dwdawbcm73v4k" path="res://coin/Coin.tscn" id="3_3dxm6"]
+[ext_resource type="PackedScene" uid="uid://du1fws2es4s06" path="res://player/player.tscn" id="4_lgr22"]
+[ext_resource type="Texture2D" path="res://main/grass.png" id="5_lgr22"]
+[ext_resource type="Script" uid="uid://bova0ulkwv8x2" path="res://main/hud.gd" id="6_trn2v"]
+[ext_resource type="FontFile" uid="uid://dpble7qr550qt" path="res://PressStart2P-Regular.ttf" id="7_03owx"]
+
+[node name="Main" type="Node" unique_id=1841797654]
+script = ExtResource("1_cm0pq")
+
+[node name="Background" type="TextureRect" parent="." unique_id=68286856]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_fos0i")
+stretch_mode = 1
+
+[node name="Coin" parent="." unique_id=1820056606 instance=ExtResource("3_3dxm6")]
+position = Vector2(237, 234)
+
+[node name="Player" parent="." unique_id=2021340039 instance=ExtResource("4_lgr22")]
+position = Vector2(260, 369)
+
+[node name="GameTimer" type="Timer" parent="." unique_id=679042316]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=2007883854]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1152.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_lgr22")
+stretch_mode = 1
+
+[node name="CoinContainer" type="Node2D" parent="." unique_id=851781479]
+
+[node name="PlayerStart" type="Marker2D" parent="." unique_id=636829236]
+
+[node name="hud" type="CanvasLayer" parent="." unique_id=690867654]
+script = ExtResource("6_trn2v")
+
+[node name="MessageLabel" type="Label" parent="hud" unique_id=1658066321]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("7_03owx")
+text = "Teste"
+horizontal_alignment = 1
+
+[node name="MessageTimer" type="Label" parent="hud" unique_id=1836466902]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="MarginContainer" type="MarginContainer" parent="hud" unique_id=1922264503]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 33.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+
+[node name="ScoreLabel" type="Label" parent="hud/MarginContainer" unique_id=784187132]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Score"
+
+[node name="TimerLabel" type="Label" parent="hud/MarginContainer" unique_id=64059329]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "00:00"
+
+[node name="Start" type="Button" parent="hud" unique_id=1591013997]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "START"
+
+[connection signal="pressed" from="hud/Start" to="hud" method="_on_start_pressed"]
