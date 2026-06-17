@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://fth60w1mqmsw"]
+
+[ext_resource type="Script" uid="uid://cy6e8rtahbhvx" path="res://main.gd" id="1_cm0pq"]
+[ext_resource type="Texture2D" uid="uid://jtfrithsum5m" path="res://1000_F_404014988_7N8rNOa9ezLOZx6O6JEscLyNCpLLZhGW.jpg" id="2_cm0pq"]
+[ext_resource type="PackedScene" uid="uid://dwdawbcm73v4k" path="res://coin/Coin.tscn" id="3_3dxm6"]
+[ext_resource type="PackedScene" uid="uid://du1fws2es4s06" path="res://player/player.tscn" id="4_lgr22"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_cm0pq")
+
+[node name="Background" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_cm0pq")
+stretch_mode = 1
+
+[node name="Coin" parent="." instance=ExtResource("3_3dxm6")]
+position = Vector2(237, 234)
+
+[node name="Player" parent="." instance=ExtResource("4_lgr22")]
+position = Vector2(260, 369)
+
+[node name="GameTimer" type="Timer" parent="."]

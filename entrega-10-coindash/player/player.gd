@@ -1,0 +1,42 @@
+extends Area2D
+@export var speed= 350
+signal pickup
+signal hurt
+var velocity = Vector2.ZERO
+var screensize = Vector2(480, 720)
+
+#delta = tempo passado, em vez de 20 fps ser mais lento que 60 fps
+func _process(delta):
+	velocity = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	position += velocity* speed * delta
+	
+	position.x = clamp(position.x, 0, screensize.x)
+	position.y = clamp(position.y, 0, screensize.y)
+	
+	if velocity.length() > 0:
+		$AnimatedSprite2D.animation = "run"
+	else:
+		$AnimatedSprite2D.animation = "idle"
+		
+	if velocity.x != 0:
+		$AnimatedSprite2D.flip_h = velocity.x < 0
+		
+		
+func die():
+	$AnimatedSprite2D.animation = "hurt"
+	set_process(false)
+	
+func on_area_entered(area):
+	if area.is_in_group("coins"):
+		area.pickup()
+		pickup.emit()
+		
+	if area.is_in_group("obstacles"):
+		hurt.emit()
+		die()
+	
+func start():
+	set_process(true)
+	position = screensize / 2
+	$AnimatedSprite2D.animation = "idle"
+	
